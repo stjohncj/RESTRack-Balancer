@@ -1,6 +1,5 @@
 require 'rubygems'
-#require 'restrack-client'
-require File.join(File.dirname(__FILE__), '../../restrack-client/lib/restrack-client')
+require 'restrack-client'
 
 module RESTRack
   class Balancer
