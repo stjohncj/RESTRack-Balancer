@@ -1,19 +1,20 @@
 # RESTRack::Balancer
 
 A library for interacting with RESTful web services with automatic load balancing across a cluster.
-Use this to communicate with RESTRack based services.
+This gem was written to communicate with RESTRack based services, although it provides a convenient API to any RESTful service.
 
 
 ## Usage
     
-    uri = URI.new('http://localhost')
-    client = RESTRack::Balancer.new(uri)
-    client = RESTRack::Balancer.new('http://localhost')
-    foo_resource = client.foo(123)                                    # pivot object that hasn't yet made request
+    uri = URI.new('http://foobar-provider.example.com')
+    provider = RESTRack::Balancer.new(uri)
+    provider = RESTRack::Balancer.new('http://foobar-provider.example.com')
+    foo = provider.foo(123).get                                       # request is made to GET /foo/123
+    foo_resource = provider.foo(123)                                  # pivot object that hasn't yet made request
     foo = foo_resource.get( { :data => 'something_here' } )           # request is made to GET /foo/123
-    bar = client.foo(123).bar                                         # pivot object that hasn't yet made request
+    bar = provider.foo(123).bar                                       # pivot object that hasn't yet made request
     bar.delete                                                        # request is made to DELETE /foo/123/bar
-    bar = client.foo(123).bar.post( { :data => 'something_here' } )   # request is made to POST /foo/123/bar
+    bar = provider.foo(123).bar.post( { :data => 'something_here' } ) # request is made to POST /foo/123/bar
 
 
 ## License
